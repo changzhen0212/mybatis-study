@@ -106,10 +106,11 @@ public class XMLMapperBuilder extends BaseBuilder {
        *
        */
       configurationElement(parser.evalNode("/mapper"));
+
       /**
        * 把资源保存到我们Configuration中
        */
-        configuration.addLoadedResource(resource);
+      configuration.addLoadedResource(resource);
 
       bindMapperForNamespace();
     }

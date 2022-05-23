@@ -290,7 +290,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     boolean isSelect = sqlCommandType == SqlCommandType.SELECT;
 
     /**
-     * 通过MapperStatment的构建器构建对象
+     * 通过MappedStatement的构建器构建对象
      */
     MappedStatement.Builder statementBuilder = new MappedStatement.Builder(configuration, id, sqlSource, sqlCommandType)
         .resource(resource)
@@ -319,11 +319,11 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
 
     /**
-     * 构建我们的的MappedStatment对象
+     * 构建我们的MappedStatement对象
      */
     MappedStatement statement = statementBuilder.build();
     /**
-     * 把mappedStatment对象加入到配置类中
+     * 把mappedStatement对象加入到配置类中
      */
     configuration.addMappedStatement(statement);
     return statement;

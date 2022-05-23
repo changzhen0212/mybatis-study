@@ -33,26 +33,49 @@ import org.apache.ibatis.session.Configuration;
  */
 public final class MappedStatement {
 
-  private String resource;//mapper配置文件名，如：UserMapper.xml
-  private Configuration configuration;//全局配置
-  private String id;//节点的id属性加命名空间,如：com.lucky.mybatis.dao.UserMapper.selectByExample
+  /** mapper配置文件名，如：UserMapper.xml */
+  private String resource;
+
+  /** 全局配置 */
+  private Configuration configuration;
+
+  /** 节点的id属性加命名空间,如：com.lucky.mybatis.dao.UserMapper.selectByExample */
+  private String id;
   private Integer fetchSize;
-  private Integer timeout;//超时时间
-  private StatementType statementType;//操作SQL的对象的类型
-  private ResultSetType resultSetType;//结果类型
-  private SqlSource sqlSource;//sql语句
-  private Cache cache;//缓存
+
+  /** 超时时间 */
+  private Integer timeout;
+
+  /** 操作SQL的对象的类型 */
+  private StatementType statementType;
+
+  /** 结果类型 */
+  private ResultSetType resultSetType;
+
+  /** sql语句 */
+  private SqlSource sqlSource;
+  /** 缓存 */
+  private Cache cache;
   private ParameterMap parameterMap;
   private List<ResultMap> resultMaps;
   private boolean flushCacheRequired;
-  private boolean useCache;//是否使用缓存，默认为true
-  private boolean resultOrdered;//结果是否排序
-  private SqlCommandType sqlCommandType;//sql语句的类型，如select、update、delete、insert
+
+  /** 是否使用缓存，默认为true */
+  private boolean useCache;
+
+  /** 结果是否排序 */
+  private boolean resultOrdered;
+
+  /** sql语句的类型，如select、update、delete、insert */
+  private SqlCommandType sqlCommandType;
+
   private KeyGenerator keyGenerator;
   private String[] keyProperties;
   private String[] keyColumns;
   private boolean hasNestedResultMaps;
-  private String databaseId;//数据库ID
+
+  /** 数据库ID */
+  private String databaseId;
   private Log statementLog;
   private LanguageDriver lang;
   private String[] resultSets;
@@ -62,6 +85,7 @@ public final class MappedStatement {
   }
 
   public static class Builder {
+
     private MappedStatement mappedStatement = new MappedStatement();
 
     public Builder(Configuration configuration, String id, SqlSource sqlSource, SqlCommandType sqlCommandType) {
@@ -187,7 +211,7 @@ public final class MappedStatement {
       assert mappedStatement.configuration != null;
       assert mappedStatement.id != null;
       assert mappedStatement.sqlSource != null;
-       assert mappedStatement.lang != null;
+      assert mappedStatement.lang != null;
       mappedStatement.resultMaps = Collections.unmodifiableList(mappedStatement.resultMaps);
       return mappedStatement;
     }
