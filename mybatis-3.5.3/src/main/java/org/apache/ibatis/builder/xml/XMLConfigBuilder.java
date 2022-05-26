@@ -80,14 +80,14 @@ public class XMLConfigBuilder extends BaseBuilder {
   /**
    * 创建一个用于解析xml配置的构建器对象
    * @param inputStream 传入进来的xml的配置
-   * @param environment 我们的环境变量
-   * @param props:用于保存我们从xml中解析出来的属性
+   * @param environment 环境变量
+   * @param props:用于保存 从xml中解析出来的属性
    */
   public XMLConfigBuilder(InputStream inputStream, String environment, Properties props) {
     /**
      * 该方法做了二个事情
-     * 第一件事情:创建XPathParser 解析器对象,在这里会把我们的
-     * 把我们的mybatis-config.xml解析出一个Document对象
+     * 第一件事情:创建XPathParser 解析器对象,在这里会把
+     * 把mybatis-config.xml解析出一个Document对象
      * 第二节事情:调用重写的构造函数来构建我XMLConfigBuilder
      */
     this(new XPathParser(inputStream, true, props, new XMLMapperEntityResolver()), environment, props);
@@ -124,7 +124,7 @@ public class XMLConfigBuilder extends BaseBuilder {
      */
     parsed = true;
     /**
-     * 解析我们的mybatis-config.xml的
+     * 解析mybatis-config.xml的
      * 节点
      * <configuration>
      *
@@ -136,7 +136,7 @@ public class XMLConfigBuilder extends BaseBuilder {
   }
 
   /**
-   * 方法实现说明:解析我们mybatis-config.xml的 configuration节点
+   * 方法实现说明:解析 mybatis-config.xml的 configuration节点
    * @author:xsls
    * @param root:configuration节点对象
    * @return:
@@ -153,7 +153,7 @@ public class XMLConfigBuilder extends BaseBuilder {
        */
       propertiesElement(root.evalNode("properties"));
       /**
-       * 解析我们的mybatis-config.xml中的settings节点
+       * 解析mybatis-config.xml中的settings节点
        * 具体可以配置哪些属性:http://www.mybatis.org/mybatis-3/zh/configuration.html#settings
        * <settings>
             <setting name="cacheEnabled" value="true"/>
@@ -180,7 +180,7 @@ public class XMLConfigBuilder extends BaseBuilder {
        */
       loadCustomLogImpl(settings);
       /**
-       * 解析我们的别名
+       * 解析别名
        * <typeAliases>
            <typeAlias alias="Author" type="cn.tulingxueyuan.pojo.Author"/>
         </typeAliases>
@@ -192,7 +192,7 @@ public class XMLConfigBuilder extends BaseBuilder {
        */
       typeAliasesElement(root.evalNode("typeAliases"));
       /**
-       * 解析我们的插件(比如分页插件)
+       * 解析插件(比如分页插件)
        * mybatis自带的
        * Executor (update, query, flushStatements, commit, rollback, getTransaction, close, isClosed)
          ParameterHandler (getParameterObject, setParameters)
@@ -215,7 +215,7 @@ public class XMLConfigBuilder extends BaseBuilder {
       settingsElement(settings);
 
       /**
-       * 解析我们的mybatis环境
+       * 解析mybatis环境
          <environments default="dev">
            <environment id="dev">
              <transactionManager type="JDBC"/>
@@ -253,7 +253,7 @@ public class XMLConfigBuilder extends BaseBuilder {
        */
       databaseIdProviderElement(root.evalNode("databaseIdProvider"));
       /**
-       * 解析我们的类型处理器节点
+       * 解析类型处理器节点
        * <typeHandlers>
             <typeHandler handler="org.mybatis.example.ExampleTypeHandler"/>
           </typeHandlers>
@@ -261,10 +261,10 @@ public class XMLConfigBuilder extends BaseBuilder {
        */
       typeHandlerElement(root.evalNode("typeHandlers"));
       /**
-       * 最最最最最重要的就是解析我们的mapper
+       * 最最最最最重要的就是解析mapper
        *
-       resource：来注册我们的class类路径下的
-       url:来指定我们磁盘下的或者网络资源的
+       resource：来注册class类路径下的
+       url:来指定 磁盘下的或者网络资源的
        class:
        若注册Mapper不带xml文件的,这里可以直接注册
        若注册的Mapper带xml文件的，需要把xml文件和mapper文件同名 同路径
@@ -534,11 +534,11 @@ public class XMLConfigBuilder extends BaseBuilder {
   private void mapperElement(XNode parent) throws Exception {
     if (parent != null) {
       /**
-       * 获取我们mappers节点下的一个一个的mapper节点
+       * 获取 mappers节点下的一个一个的mapper节点
        */
       for (XNode child : parent.getChildren()) {
         /**
-         * 判断我们mapper是不是通过批量注册的
+         * 判断 mapper是不是通过批量注册的
          * <package name="com.tuling.mapper"></package>
          */
         if ("package".equals(child.getName())) {
@@ -546,12 +546,12 @@ public class XMLConfigBuilder extends BaseBuilder {
           configuration.addMappers(mapperPackage);
         } else {
           /**
-           * 判断从classpath下读取我们的mapper
+           * 判断从classpath下读取mapper
            * <mapper resource="mybatis/mapper/EmployeeMapper.xml"/>
            */
           String resource = child.getStringAttribute("resource");
           /**
-           * 判断是不是从我们的网络资源读取(或者本地磁盘得)
+           * 判断是不是从网络资源读取(或者本地磁盘得)
            * <mapper url="D:/mapper/EmployeeMapper.xml"/>
            */
           String url = child.getStringAttribute("url");
@@ -563,21 +563,21 @@ public class XMLConfigBuilder extends BaseBuilder {
           String mapperClass = child.getStringAttribute("class");
 
           /**
-           * 我们得mappers节点只配置了
+           *  得mappers节点只配置了
            * <mapper resource="mybatis/mapper/EmployeeMapper.xml"/>
            */
           if (resource != null && url == null && mapperClass == null) {
             ErrorContext.instance().resource(resource);
             /**
-             * 把我们的文件读取出一个流
+             * 把文件读取出一个流
              */
             InputStream inputStream = Resources.getResourceAsStream(resource);
             /**
-             * 创建读取XmlMapper构建器对象,用于来解析我们的mapper.xml文件
+             * 创建读取XmlMapper构建器对象,用于来解析mapper.xml文件
              */
             XMLMapperBuilder mapperParser = new XMLMapperBuilder(inputStream, configuration, resource, configuration.getSqlFragments());
             /**
-             * 真正的解析我们的mapper.xml配置文件(说白了就是来解析我们的sql)
+             * 真正的解析mapper.xml配置文件(说白了就是来解析sql)
              */
             mapperParser.parse();
           } else if (resource == null && url != null && mapperClass == null) {

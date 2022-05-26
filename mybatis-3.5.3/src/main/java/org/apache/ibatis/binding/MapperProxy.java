@@ -39,7 +39,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   private final SqlSession sqlSession;
   private final Class<T> mapperInterface;
   /**
-   * 用于缓存我们的MapperMethod方法
+   * 用于缓存MapperMethod方法
    */
   private final Map<Method, MapperMethod> methodCache;
 
@@ -64,7 +64,7 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   }
 
   /**
-   * 方法实现说明:我们的Mapper接口调用我们的目标对象
+   * 方法实现说明:Mapper接口调用目标对象
    * @author:xsls
    * @param proxy 代理对象
    * @param method:目标方法
@@ -76,13 +76,13 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
     try {
       /**
-       * 判断我们的方法是不是我们的Object类定义的方法，若是直接通过反射调用
+       * 判断方法是不是Object类定义的方法，若是直接通过反射调用
        */
       if (Object.class.equals(method.getDeclaringClass())) {
         return method.invoke(this, args);
       } else if (method.isDefault()) {   //是否接口的默认方法
         /**
-         * 调用我们的接口中的默认方法
+         * 调用接口中的默认方法
          */
         return invokeDefaultMethod(proxy, method, args);
       }
@@ -91,19 +91,19 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
     }
     /**
      * 真正的进行调用,做了二个事情
-     * 第一步:把我们的方法对象封装成一个MapperMethod对象(带有缓存作用的)
+     * 第一步:把方法对象封装成一个MapperMethod对象(带有缓存作用的)
      */
     final MapperMethod mapperMethod = cachedMapperMethod(method);
     /**
-     *通过sqlSessionTemplate来调用我们的目标方法
-     * 那么我们就需要去研究下sqlSessionTemplate是什么初始化的
-     * 我们知道spring 跟mybatis整合的时候，进行了偷天换日
-     * 把我们mapper接口包下的所有接口类型都变为了MapperFactoryBean
-     * 然后我们发现实现了SqlSessionDaoSupport,我们还记得在整合的时候，
-     * 把我们EmployeeMapper(案例class类型属性为MapperFactoryBean)
+     *通过sqlSessionTemplate来调用目标方法
+     * 那么 就需要去研究下sqlSessionTemplate是什么初始化的
+     *  知道spring 跟mybatis整合的时候，进行了偷天换日
+     * 把 mapper接口包下的所有接口类型都变为了MapperFactoryBean
+     * 然后 发现实现了SqlSessionDaoSupport, 还记得在整合的时候，
+     * 把 EmployeeMapper(案例class类型属性为MapperFactoryBean)
      * 的注入模型给改了，改成了by_type,所以会调用SqlSessionDaoSupport
-     * 的setXXX方法进行赋值,从而创建了我们的sqlSessionTemplate
-     * 而在实例化我们的sqlSessionTemplate对象的时候，为我们创建了sqlSessionTemplate的代理对象
+     * 的setXXX方法进行赋值,从而创建了sqlSessionTemplate
+     * 而在实例化sqlSessionTemplate对象的时候，为 创建了sqlSessionTemplate的代理对象
      *     this.sqlSessionProxy = (SqlSession) newProxyInstance(SqlSessionFactory.class.getClassLoader(),
             new Class[] { SqlSession.class }, new SqlSessionInterceptor());
      */
@@ -111,9 +111,9 @@ public class MapperProxy<T> implements InvocationHandler, Serializable {
   }
 
   /**
-   * 方法实现说明:缓存我们mapper中的方法
+   * 方法实现说明:缓存 mapper中的方法
    * @author:xsls
-   * @param method:我们Mapper接口中的方法
+   * @param method: Mapper接口中的方法
    * @return:MapperMethod
    * @exception:
    * @date:2019/9/6 21:42

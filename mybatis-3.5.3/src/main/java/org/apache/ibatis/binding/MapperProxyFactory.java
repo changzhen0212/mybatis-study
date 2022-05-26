@@ -43,12 +43,13 @@ public class MapperProxyFactory<T> {
   }
 
   @SuppressWarnings("unchecked")
+  // # 生成Mapper接口的动态代理类MapperProxy，MapperProxy实现了InvocationHandler 接口
   protected T newInstance(MapperProxy<T> mapperProxy) {
     return (T) Proxy.newProxyInstance(mapperInterface.getClassLoader(), new Class[] { mapperInterface }, mapperProxy);
   }
 
   /**
-   * 方法实现说明:创建我们的UserMapper接口代理
+   * 方法实现说明:创建UserMapper接口代理
    * @author:xsls
    * @param sqlSession:sqlSessionTemplate
    * @return:
@@ -57,11 +58,11 @@ public class MapperProxyFactory<T> {
    */
   public T newInstance(SqlSession sqlSession) {
     /**
-     * 创建我们的代理对象
+     * 创建代理对象
      */
     final MapperProxy<T> mapperProxy = new MapperProxy<>(sqlSession, mapperInterface, methodCache);
     /**
-     * 创建我们的Mapper代理对象返回
+     * 创建Mapper代理对象返回
      */
     return newInstance(mapperProxy);
   }

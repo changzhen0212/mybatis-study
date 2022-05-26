@@ -37,11 +37,11 @@ public abstract class BaseBuilder {
    */
   protected final Configuration configuration;
   /**
-   * 用于保存我们的Entity的别名
+   * 用于保存Entity的别名
    */
   protected final TypeAliasRegistry typeAliasRegistry;
   /**
-   * 用户保存我们java类型和jdbc数据库类型的
+   * 用户保存 java类型和jdbc数据库类型的
    */
   protected final TypeHandlerRegistry typeHandlerRegistry;
 
@@ -131,7 +131,7 @@ public abstract class BaseBuilder {
     }
     try {
       /**
-       * 真正的解析我们的别名
+       * 真正的解析别名
        */
       return resolveAlias(alias);
     } catch (Exception e) {

@@ -122,7 +122,7 @@ SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(confi
 
     <subsection name="从 SqlSessionFactory 中获取 SqlSession">
       <p>
-        既然有了 SqlSessionFactory，顾名思义，我们就可以从中获得 SqlSession 的实例了。SqlSession
+        既然有了 SqlSessionFactory，顾名思义， 就可以从中获得 SqlSession 的实例了。SqlSession
         完全包含了面向数据库执行 SQL 命令所需的所有方法。你可以通过
         SqlSession 实例来直接执行已映射的 SQL 语句。例如：
       </p>
@@ -142,7 +142,7 @@ SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(confi
   BlogMapper mapper = session.getMapper(BlogMapper.class);
   Blog blog = mapper.selectBlog(101);
 }]]></source>
-      <p>现在我们来探究一下这里到底是怎么执行的。</p>
+      <p>现在 来探究一下这里到底是怎么执行的。</p>
     </subsection>
 
     <subsection name="探究已映射的 SQL 语句">
@@ -152,10 +152,10 @@ SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(confi
         不过为了让你能够了解个大概，这里会给出几个例子。
       </p>
       <p>
-        在上面提到的例子中，一个语句既可以通过 XML 定义，也可以通过注解定义。我们先看看
+        在上面提到的例子中，一个语句既可以通过 XML 定义，也可以通过注解定义。 先看看
         XML 定义语句的方式，事实上 MyBatis 提供的全部特性都可以利用基于 XML 的映射语言来实现，这使得
         MyBatis 在过去的数年间得以流行。如果你以前用过 MyBatis，你应该对这个概念比较熟悉。
-        不过自那以后，XML 的配置也改进了许多，我们稍后还会再提到。这里给出一个基于 XML
+        不过自那以后，XML 的配置也改进了许多， 稍后还会再提到。这里给出一个基于 XML
         映射语句的示例，它应该可以满足上述示例中 SqlSession 的调用。
       </p>
 
@@ -170,7 +170,7 @@ SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(confi
 </mapper>]]></source>
 
       <p>
-        为了这个简单的例子，我们似乎写了不少配置，但实际上它并不多。在一个
+        为了这个简单的例子， 似乎写了不少配置，但实际上它并不多。在一个
         XML 映射文件中，可以定义无数个映射语句，这样一来，XML
         头部和文档类型声明占去的部分就显得微不足道了。而文件的剩余部分具备自解释性，很容易理解。
         在命名空间 “org.mybatis.example.BlogMapper” 中定义了一个名为 “selectBlog”
@@ -247,7 +247,7 @@ public interface BlogMapper {
       </p>
     </subsection>
     <subsection name="作用域（Scope）和生命周期">
-      <p>理解我们目前已经讨论过的不同作用域和生命周期类是至关重要的，因为错误的使用会导致非常严重的并发问题。</p>
+      <p>理解 目前已经讨论过的不同作用域和生命周期类是至关重要的，因为错误的使用会导致非常严重的并发问题。</p>
       <hr/>
       <p>
         <span class="label important">提示</span>

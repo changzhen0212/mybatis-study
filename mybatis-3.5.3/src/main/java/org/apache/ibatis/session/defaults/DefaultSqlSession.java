@@ -71,9 +71,9 @@ public class DefaultSqlSession implements SqlSession {
   }
 
   /**
-   * 方法实现说明:查询我们当个对象
+   * 方法实现说明:查询 当个对象
    * @author:xsls
-   * @param statement:我们的statementId(com.tuling.mapper.EmployeeMapper.findOne)
+   * @param statement:statementId(com.tuling.mapper.EmployeeMapper.findOne)
    * @param parameter:调用时候的参数
    * @return: T 返回结果
    * @exception:
@@ -91,7 +91,7 @@ public class DefaultSqlSession implements SqlSession {
       return list.get(0);
     } else if (list.size() > 1) {
       /**
-       * 查询的有多个,那么久抛出我们熟悉的异常
+       * 查询的有多个,那么久抛出 熟悉的异常
        * Expected one result (or null) to be returned by selectOne(), but found: " + list.size()
        */
       throw new TooManyResultsException("Expected one result (or null) to be returned by selectOne(), but found: " + list.size());
@@ -153,8 +153,8 @@ public class DefaultSqlSession implements SqlSession {
   }
 
   /**
-   * 查询我们的集合
-   * @param statement 用于去匹配我们Configuration对象中的mappedStatment对象
+   * 查询集合
+   * @param statement 用于去匹配 Configuration对象中的mappedStatment对象
    * @param parameter 调用的参数对象
    * @param <E>
    * @return
@@ -178,14 +178,14 @@ public class DefaultSqlSession implements SqlSession {
   public <E> List<E> selectList(String statement, Object parameter, RowBounds rowBounds) {
     try {
       /**
-       * 第一步：通过我们的statement去我们的全局配置类中获取MappedStatement
+       * 第一步：通过statement去全局配置类中获取MappedStatement
        *
        * CRUD
        */
       MappedStatement ms = configuration.getMappedStatement(statement);
       /**
-       * 通过执行器去执行我们的sql对象
-       * 第一步:包装我们的集合类参数
+       * 通过执行器去执行sql对象
+       * 第一步:包装集合类参数
        * 第二步:一般情况下是executor为cacheExetory对象
        */
       return executor.query(ms, wrapCollection(parameter), rowBounds, Executor.NO_RESULT_HANDLER);
@@ -361,7 +361,7 @@ public class DefaultSqlSession implements SqlSession {
   }
 
   /**
-   * 方法实现说明:包装我们集合类的参数
+   * 方法实现说明:包装 集合类的参数
    * @author:xsls
    * @param object:参数对象
    * @return:Object：包装后的对象
@@ -369,12 +369,12 @@ public class DefaultSqlSession implements SqlSession {
    * @date:2019/9/9 20:36
    */
   private Object wrapCollection(final Object object) {
-    //若我们的参数类型是Collection
+    //若参数类型是Collection
     if (object instanceof Collection) {
       StrictMap<Object> map = new StrictMap<>();
       //把他key为collection存放到map中
       map.put("collection", object);
-      //若我们参数类型是list类型  把key为list作为集合存放到map中
+      //若 参数类型是list类型  把key为list作为集合存放到map中
       if (object instanceof List) {
         map.put("list", object);
       }

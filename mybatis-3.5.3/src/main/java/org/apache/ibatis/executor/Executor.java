@@ -48,7 +48,7 @@ public interface Executor {
 
   /**
    * 更新 or 插入 or 删除，由传入的 MappedStatement 的 SQL 所决定
-   * @param ms 我们的执行sql包装对象（MappedStatement）
+   * @param ms 执行sql包装对象（MappedStatement）
    * @param parameter 执行的参数
    * @return
    * @throws SQLException
@@ -57,12 +57,12 @@ public interface Executor {
 
   /**
    * 查询带缓存key查询
-   * @param ms 我们的执行sql包装对象（MappedStatement）
+   * @param ms 执行sql包装对象（MappedStatement）
    * @param parameter:参数
    * @param rowBounds 逻辑分页参数
    * @param resultHandler:返回结果处理器
    * @param cacheKey:缓存key
-   * @param boundSql：我们的sql对象
+   * @param boundSql：sql对象
    * @return 查询结果集list
    * @throws SQLException
    */
@@ -70,7 +70,7 @@ public interface Executor {
 
   /**
    * 不走缓存查询
-   * @param ms 我们的执行sql包装对象（MappedStatement）
+   * @param ms 执行sql包装对象（MappedStatement）
    * @param parameter:参数
    * @param rowBounds 逻辑分页参数
    * @param resultHandler:返回结果处理器
@@ -81,7 +81,7 @@ public interface Executor {
 
   /**
    * 调用存过查询返回游标对象
-   * @param ms 我们的执行sql包装对象（MappedStatement）
+   * @param ms 执行sql包装对象（MappedStatement）
    * @param parameter:参数
    * @param rowBounds 逻辑分页参数
    * @return Cursor数据库游标

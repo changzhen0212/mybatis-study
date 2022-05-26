@@ -1393,7 +1393,7 @@ public class GenericTypeHandler<E extends MyObject> extends BaseTypeHandler<E> {
 ]]></source>
 
         <p><code>EnumTypeHandler</code> 和 <code>EnumOrdinalTypeHandler</code>
-        都是泛型类型处理器，我们将会在接下来的部分详细探讨。</p>
+        都是泛型类型处理器， 将会在接下来的部分详细探讨。</p>
 
       </subsection>
 
@@ -1401,14 +1401,14 @@ public class GenericTypeHandler<E extends MyObject> extends BaseTypeHandler<E> {
         <p>若想映射枚举类型 <code>Enum</code>，则需要从 <code>EnumTypeHandler</code>
         或者 <code>EnumOrdinalTypeHandler</code> 中选一个来使用。</p>
 
-        <p>比如说我们想存储取近似值时用到的舍入模式。默认情况下，MyBatis 会利用
+        <p>比如说 想存储取近似值时用到的舍入模式。默认情况下，MyBatis 会利用
         <code>EnumTypeHandler</code> 来把 <code>Enum</code> 值转换成对应的名字。</p>
 
         <b>注意 <code>EnumTypeHandler</code>
         在某种意义上来说是比较特别的，其他的处理器只针对某个特定的类，而它不同，它会处理任意继承了
         <code>Enum</code> 的类。</b>
 
-        <p>不过，我们可能不想存储名字，相反我们的 DBA 会坚持使用整形值代码。那也一样轻而易举：
+        <p>不过， 可能不想存储名字，相反 DBA 会坚持使用整形值代码。那也一样轻而易举：
           在配置文件中把 <code>EnumOrdinalTypeHandler</code> 加到 <code>typeHandlers</code> 中即可，
           这样每个 <code>RoundingMode</code> 将通过他们的序数值来映射成对应的整形数值。
         </p>
@@ -1420,7 +1420,7 @@ public class GenericTypeHandler<E extends MyObject> extends BaseTypeHandler<E> {
         <p>但是怎样能将同样的 <code>Enum</code> 既映射成字符串又映射成整形呢？</p>
         <p>
           自动映射器（auto-mapper）会自动地选用 <code>EnumOrdinalTypeHandler</code> 来处理，
-          所以如果我们想用普通的 <code>EnumTypeHandler</code>，就必须要显式地为那些 SQL 语句设置要使用的类型处理器。
+          所以如果 想用普通的 <code>EnumTypeHandler</code>，就必须要显式地为那些 SQL 语句设置要使用的类型处理器。
         </p>
         <p>（下一节才开始介绍映射器文件，如果你是首次阅读该文档，你可能需要先跳过这里，过会再来看。）</p>
         <source><![CDATA[<!DOCTYPE mapper
@@ -1823,8 +1823,8 @@ public class C3P0DataSourceFactory extends UnpooledDataSourceFactory {
 
       <subsection name="映射器（mappers）" id="mappers">
         <p>
-          既然 MyBatis 的行为已经由上述元素配置完了，我们现在就要定义 SQL 映射语句了。
-          但是首先我们需要告诉 MyBatis 到哪里去找到这些语句。
+          既然 MyBatis 的行为已经由上述元素配置完了， 现在就要定义 SQL 映射语句了。
+          但是首先 需要告诉 MyBatis 到哪里去找到这些语句。
           Java 在自动查找这方面没有提供一个很好的方法，所以最佳的方式是告诉 MyBatis 到哪里去找映射文件。
           你可以使用相对于类路径的资源引用，
           或完全限定资源定位符（包括 <code>file:///</code> 的 URL），或类名和包名等。例如：
@@ -1856,7 +1856,7 @@ public class C3P0DataSourceFactory extends UnpooledDataSourceFactory {
 </mappers>]]></source>
 
         <p>这些配置会告诉了 MyBatis 去哪里找映射文件，剩下的细节就应该是每个 SQL
-        映射文件了，也就是接下来我们要讨论的。</p>
+        映射文件了，也就是接下来 要讨论的。</p>
       </subsection>
     </section>
   </body>

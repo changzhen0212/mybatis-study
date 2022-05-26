@@ -41,18 +41,18 @@ public abstract class SqlSessionDaoSupport extends DaoSupport {
   private SqlSessionTemplate sqlSessionTemplate;
 
   /**
-   * 方法实现说明:所以在这里会spring ioc容器会调用set方法,为我们的sqlSessionTemplate赋值
+   * 方法实现说明:所以在这里会spring ioc容器会调用set方法,为sqlSessionTemplate赋值
    *
    * @author:xsls
    * @param sqlSessionFactory
-   *          从容器中获取的我们自己配置的SqlSessionFactory的bean
+   *          从容器中获取的 自己配置的SqlSessionFactory的bean
    * @return:
    * @exception:
    * @date:2019/8/22 19:24
    */
   public void setSqlSessionFactory(SqlSessionFactory sqlSessionFactory) {
     /**
-     * 最终为我们的sqlSessionTemplate进行赋值
+     * 最终为sqlSessionTemplate进行赋值
      */
     if (this.sqlSessionTemplate == null || sqlSessionFactory != this.sqlSessionTemplate.getSqlSessionFactory()) {
       this.sqlSessionTemplate = createSqlSessionTemplate(sqlSessionFactory);
@@ -121,8 +121,8 @@ public abstract class SqlSessionDaoSupport extends DaoSupport {
   }
 
   /**
-   * 方法实现说明:用于检查我们类的属性sqlSessionFactory,sqlSessionTemplate是否为空
-   * 
+   * 方法实现说明:用于检查 类的属性sqlSessionFactory,sqlSessionTemplate是否为空
+   *
    * @author:xsls
    * @return:
    * @exception:

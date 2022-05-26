@@ -562,7 +562,7 @@ public class Configuration {
       //获取默认的sql脚本解析类型
       return languageRegistry.getDefaultDriver();
     }
-    //解析我们配置的
+    //解析 配置的
     languageRegistry.register(langClass);
     return languageRegistry.getDriver(langClass);
   }
@@ -801,6 +801,9 @@ public class Configuration {
   }
 
   public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
+    // mapperRegistry实质上是一个Map，里面注册了启动过程中解析的各种Mapper.xml
+    // mapperRegistry的key是接口的Class类型
+    // mapperRegistry的Value是MapperProxyFactory,用于生成对应的MapperProxy（动态代理类）
     return mapperRegistry.getMapper(type, sqlSession);
   }
 

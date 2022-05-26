@@ -47,7 +47,7 @@ public class XMLStatementBuilder extends BaseBuilder {
   }
 
   /**
-   * 方法实现说明:用于解析我们的的inset|select|update|delte节点的
+   * 方法实现说明:用于解析的inset|select|update|delte节点的
    * @author:xsls
    * @param configuration:mybtais的全局配置类
    * @param builderAssistant:MapperStatemnt构建的辅助类
@@ -69,11 +69,11 @@ public class XMLStatementBuilder extends BaseBuilder {
    */
   public void parseStatementNode() {
     /**
-     * 我们的insert|delte|update|select 语句的sqlId
+     * insert|delte|update|select 语句的sqlId
      */
     String id = context.getStringAttribute("id");
     /**
-     * 判断我们的insert|delte|update|select  节点是否配置了
+     * 判断insert|delte|update|select  节点是否配置了
      * 数据库厂商标注
      */
     String databaseId = context.getStringAttribute("databaseId");
@@ -115,7 +115,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     boolean resultOrdered = context.getBooleanAttribute("resultOrdered", false);
 
     /**
-     * 解析我们的sql公用片段
+     * 解析sql公用片段
      *     <select id="qryEmployeeById" resultType="Employee" parameterType="int">
               <include refid="selectInfo"></include>
               employee where id=#{id}
@@ -127,7 +127,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     includeParser.applyIncludes(context.getNode());
 
     /**
-     * 解析我们sql节点的参数类型
+     * 解析 sql节点的参数类型
      */
     String parameterType = context.getStringAttribute("parameterType");
     // 把参数类型字符串转化为class
@@ -148,13 +148,13 @@ public class XMLStatementBuilder extends BaseBuilder {
 
     // Parse selectKey after includes and remove them.
     /**
-     * 解析我们<insert 语句的的selectKey节点, 一般在oracle里面设置自增id
+     * 解析 <insert 语句的的selectKey节点, 一般在oracle里面设置自增id
      */
     processSelectKeyNodes(id, parameterTypeClass, langDriver);
 
     // Parse the SQL (pre: <selectKey> and <include> were parsed and removed)
     /**
-     * 我们insert语句 用于主键生成组件
+     *  insert语句 用于主键生成组件
      */
     KeyGenerator keyGenerator;
     /**
@@ -163,21 +163,21 @@ public class XMLStatementBuilder extends BaseBuilder {
      */
     String keyStatementId = id + SelectKeyGenerator.SELECT_KEY_SUFFIX;
     /**
-     * 把我们的命名空间拼接到keyStatementId中
+     * 把命名空间拼接到keyStatementId中
      * com.tuling.mapper.Employee.saveEmployee!selectKey
      */
     keyStatementId = builderAssistant.applyCurrentNamespace(keyStatementId, true);
     /**
      *<insert id="saveEmployee" parameterType="com.tuling.entity.Employee" useGeneratedKeys="true" keyProperty="id">
-     *判断我们全局的配置类configuration中是否包含以及解析过的主键生成器对象
+     *判断 全局的配置类configuration中是否包含以及解析过的主键生成器对象
      */
     if (configuration.hasKeyGenerator(keyStatementId)) {
       keyGenerator = configuration.getKeyGenerator(keyStatementId);
     } else {
 
       /**
-       * 若我们<insert 配置了useGeneratedKeys 那么就取useGeneratedKeys的配置值,
-       * 否者就看我们的mybatis-config.xml配置文件中是配置了
+       * 若 <insert 配置了useGeneratedKeys 那么就取useGeneratedKeys的配置值,
+       * 否者就看mybatis-config.xml配置文件中是配置了
        * <setting name="useGeneratedKeys" value="true"></setting> 默认是false
        * 并且判断sql操作类型是否为insert
        * 若是的话,那么使用的生成策略就是Jdbc3KeyGenerator.INSTANCE
@@ -189,7 +189,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     }
 
     /**
-     * 通过class org.apache.ibatis.scripting.xmltags.XMLLanguageDriver来解析我们的
+     * 通过class org.apache.ibatis.scripting.xmltags.XMLLanguageDriver来解析
      * sql脚本对象  .  解析SqlNode.
      * 注意， 只是解析成一个个的SqlNode， 并不会完全解析sql,因为这个时候参数都没确定，动态sql无法解析
      */
@@ -215,7 +215,7 @@ public class XMLStatementBuilder extends BaseBuilder {
      * 可以使用 resultType 或 resultMap，但不能同时使用
      */
     String resultType = context.getStringAttribute("resultType");
-    /**解析我们查询结果集返回的类型     */
+    /**解析 查询结果集返回的类型     */
     Class<?> resultTypeClass = resolveClass(resultType);
     /**
      * 外部 resultMap 的命名引用。结果集的映射是 MyBatis 最强大的特性，如果你对其理解透彻，许多复杂映射的情形都能迎刃而解。
@@ -237,7 +237,7 @@ public class XMLStatementBuilder extends BaseBuilder {
     String resultSets = context.getStringAttribute("resultSets");
 
     /**
-     * 为我们的insert|delete|update|select节点构建成我们的mappedStatment对象
+     * 为insert|delete|update|select节点构建成mappedStatment对象
      */
     builderAssistant.addMappedStatement(id, sqlSource, statementType, sqlCommandType,
         fetchSize, timeout, parameterMap, parameterTypeClass, resultMap, resultTypeClass,

@@ -46,7 +46,7 @@ import org.apache.ibatis.session.SqlSession;
  */
 /**
 * @vlog: 高于生活，源于生活
-* @desc: 类的描述:用于封装我们的Mapper接口中的方法对象
+* @desc: 类的描述:用于封装Mapper接口中的方法对象
 * @author: xsls
 * @createDate: 2019/9/6 21:46
 * @version: 1.0
@@ -54,25 +54,25 @@ import org.apache.ibatis.session.SqlSession;
 public class MapperMethod {
 
   /**
-   * 用于保存我们Mapper接口方法信息
+   * 用于保存 Mapper接口方法信息
    */
   private final SqlCommand command;
   private final MethodSignature method;
 
   public MapperMethod(Class<?> mapperInterface, Method method, Configuration config) {
     /**
-     * 创建我们的SqlCommand对象
+     * 创建SqlCommand对象
      */
     this.command = new SqlCommand(config, mapperInterface, method);
     /**
-     * 创建我们的方法签名对象
+     * 创建方法签名对象
      */
     this.method = new MethodSignature(config, mapperInterface, method);
   }
 
   /**
-   * 方法实现说明:执行我们的目标方法
-   * @author:sqlSession:我们的sqlSessionTemplate
+   * 方法实现说明:执行目标方法
+   * @author:sqlSession:sqlSessionTemplate
    * @param args:方法参数
    * @return:Object
    * @exception:
@@ -81,7 +81,7 @@ public class MapperMethod {
   public Object execute(SqlSession sqlSession, Object[] args) {
     Object result;
     /**
-     * 判断我们执行sql命令的类型
+     * 判断 执行sql命令的类型
      */
     switch (command.getType()) {
       //insert操作
@@ -121,17 +121,17 @@ public class MapperMethod {
           //查询返回单个
 
           /**
-           * 解析我们的参数
+           * 解析参数
            */
           Object param = method.convertArgsToSqlCommandParam(args);
           /**
-           * 通过调用sqlSessionTemplate来执行我们的sql
-           * 第一步:获取我们的statmentName(com.tuling.mapper.EmployeeMapper.findOne)
-           * 然后我们就需要重点研究下SqlSessionTemplate是怎么来的?
-           * 在mybatis和spring整合的时候，我们偷天换日了我们mapper接口包下的所有的
+           * 通过调用sqlSessionTemplate来执行sql
+           * 第一步:获取statmentName(com.tuling.mapper.EmployeeMapper.findOne)
+           * 然后 就需要重点研究下SqlSessionTemplate是怎么来的?
+           * 在mybatis和spring整合的时候， 偷天换日了 mapper接口包下的所有的
            * beandefinition改成了MapperFactoryBean类型的
            * MapperFactoryBean<T> extends SqlSessionDaoSupport的类实现了SqlSessionDaoSupport
-           * 那么就会调用他的setXXX方法为我们的sqlSessionTemplate赋值
+           * 那么就会调用他的setXXX方法为sqlSessionTemplate赋值
            *
            */
           result = sqlSession.selectOne(command.getName(), param);
@@ -267,7 +267,7 @@ public class MapperMethod {
   }
 
   /**
-   * 用户保存我们Mapper接口方法信息
+   * 用户保存 Mapper接口方法信息
    */
   public static class SqlCommand {
     /**
@@ -280,22 +280,22 @@ public class MapperMethod {
     private final SqlCommandType type;
 
     /**
-     * 方法实现说明:创建我们的SqlCommand
+     * 方法实现说明:创建SqlCommand
      * @author:xsls
      * @param configuration：mybatis的全局配置
-     * @param mapperInterface:我们Mapper接口的class类型
+     * @param mapperInterface: Mapper接口的class类型
      * @param method:方法对象
      * @return:
      * @exception:
      * @date:2019/9/6 21:51
      */
     public SqlCommand(Configuration configuration, Class<?> mapperInterface, Method method) {
-      //获取我们的方法的名称
+      //获取方法的名称
       final String methodName = method.getName();
       //方法所在接口的类型
       final Class<?> declaringClass = method.getDeclaringClass();
       /**
-       * 根据接口,方法名称解析出我们对应的mapperStatment对象
+       * 根据接口,方法名称解析出 对应的mapperStatment对象
        */
       MappedStatement ms = resolveMappedStatement(mapperInterface, methodName, declaringClass,
           configuration);
@@ -308,7 +308,7 @@ public class MapperMethod {
               + mapperInterface.getName() + "." + methodName);
         }
       } else {
-        //把我们的mappedStatmentID（com.tuling.mapper.EmpMapper.findEmp）
+        //把mappedStatmentID（com.tuling.mapper.EmpMapper.findEmp）
         name = ms.getId();
         //sql操作的类型(比如insert|delete|update|select)
         type = ms.getSqlCommandType();
@@ -327,9 +327,9 @@ public class MapperMethod {
     }
 
     /**
-     * 方法实现说明:解析我们的mappedStatment对象
+     * 方法实现说明:解析mappedStatment对象
      * @author:xsls
-     * @param mapperInterface:我们mapper接口的class类型
+     * @param mapperInterface: mapper接口的class类型
      * @param methodName :方法名称
      * @param declaringClass:方法所在类的接口
      * @param configuration:mybatis的全局配置
@@ -339,9 +339,9 @@ public class MapperMethod {
      */
     private MappedStatement resolveMappedStatement(Class<?> mapperInterface, String methodName,
         Class<?> declaringClass, Configuration configuration) {
-      //获取我们的sql对应的statmentId(com.tuling.mapper.DeptMapper.findDepts)
+      //获取sql对应的statmentId(com.tuling.mapper.DeptMapper.findDepts)
       String statementId = mapperInterface.getName() + "." + methodName;
-      //根据我们的statmentId判断我们的主配置类是否包含 了我们的mapperStatment对象
+      //根据statmentId判断主配置类是否包含 了mapperStatment对象
       if (configuration.hasStatement(statementId)) {
         //存在通过key获取对应的mapperStatment对象返回
         return configuration.getMappedStatement(statementId);
@@ -349,12 +349,12 @@ public class MapperMethod {
         return null;
       }
       /**
-       * 获取我们mapper接口的父类接口
+       * 获取 mapper接口的父类接口
        */
       for (Class<?> superInterface : mapperInterface.getInterfaces()) {
         //判断方法所在的类是否实现了superInterface
         if (declaringClass.isAssignableFrom(superInterface)) {
-          //解析我们父类的MappedStatment对象
+          //解析 父类的MappedStatment对象
           MappedStatement ms = resolveMappedStatement(superInterface, methodName,
               declaringClass, configuration);
           if (ms != null) {
@@ -383,7 +383,7 @@ public class MapperMethod {
      * 方法实现说明:方法签名对象
      * @author:xsls
      * @param configuration:mybaits的全局配置类
-     * @param mapperInterface:我们mapper接口的class
+     * @param mapperInterface: mapper接口的class
      * @param method:接口方法调用对象
      * @return:
      * @exception:
@@ -417,13 +417,13 @@ public class MapperMethod {
       this.rowBoundsIndex = getUniqueParamIndex(method, RowBounds.class);
       this.resultHandlerIndex = getUniqueParamIndex(method, ResultHandler.class);
       /**
-       * 初始化我们参数解析器对象
+       * 初始化 参数解析器对象
        */
       this.paramNameResolver = new ParamNameResolver(configuration, method);
     }
 
     /**
-     * 方法实现说明:通过我们的参数解析器解析方法的参数
+     * 方法实现说明:通过参数解析器解析方法的参数
      * @author:xsls
      * @param args:参数数组
      * @return: Object处理后的参数

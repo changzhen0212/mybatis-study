@@ -53,7 +53,7 @@ import org.springframework.beans.factory.FactoryBean;
  */
 /**
  * @vlog: 高于生活，源于生活
- * @desc: 类的描述:这个了就是我们UserMapper的代理类,他也会经过 springIoc容器bean的生命周期,在bean的生命周期方法populate()方法会给属性进行赋值
+ * @desc: 类的描述:这个了就是 UserMapper的代理类,他也会经过 springIoc容器bean的生命周期,在bean的生命周期方法populate()方法会给属性进行赋值
  *        由于在ClassMapperScan类中已经把当前的bean定义的注入模型给修改了by_type 所以，凡是写了setXXX的方法的,spring ioc在populate() 去进行调用
  * @author: xsls
  * @createDate: 2019/8/22 19:20
@@ -70,14 +70,14 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
   }
 
   /**
-   * 在这里又是一个牛逼的设计闪光点:我们知道在ClassPathMapperScanner 扫描我们的UserMapper<MapperFactoryBean>的时候做了一个牛逼的事情,
-   * 他扫描我们的UserMapper的时候的bean定义是接口类型的，我们知道接口类型是不能够被实例化的 所以在ClassPathMapperScanner扫描之后马上进行来处理UserMapper的bean定义
+   * 在这里又是一个牛逼的设计闪光点: 知道在ClassPathMapperScanner 扫描UserMapper<MapperFactoryBean>的时候做了一个牛逼的事情,
+   * 他扫描UserMapper的时候的bean定义是接口类型的， 知道接口类型是不能够被实例化的 所以在ClassPathMapperScanner扫描之后马上进行来处理UserMapper的bean定义
    * definition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
-   * definition.setBeanClass(this.mapperFactoryBeanClass); 把UserMapper的bean定义给改成我们的MapperFactoryBean,
-   * 最终我们实例化UserMapper就是我们的MapperFactoryBean类型,
+   * definition.setBeanClass(this.mapperFactoryBeanClass); 把UserMapper的bean定义给改成MapperFactoryBean,
+   * 最终 实例化UserMapper就是MapperFactoryBean类型,
    * definition.getConstructorArgumentValues().addGenericArgumentValue(beanClassName);
-   * 就是来指定我们的实例化MapperFactoryBean的构造函数的参数。这么做的目的就是 因为MapperFactoryBean 是我们的Factorybean对象, 最终返回的是getObject()方法放回的对象
-   * 而getObject()对象返回的是一个jdk代理对象，我们知道jdk代理对象需要代理接口， 所以这里就是为了保存我们传入进来的接口类型
+   * 就是来指定实例化MapperFactoryBean的构造函数的参数。这么做的目的就是 因为MapperFactoryBean 是Factorybean对象, 最终返回的是getObject()方法放回的对象
+   * 而getObject()对象返回的是一个jdk代理对象， 知道jdk代理对象需要代理接口， 所以这里就是为了保存 传入进来的接口类型
    *
    * @param mapperInterface
    */
@@ -97,12 +97,12 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
   @Override
   protected void checkDaoConfig() {
     /**
-     * 调用父类的SqlSessionDaoSupport的方法来检查我们的SqlSessionFactory 或者sqlSessionTemplate是否为空
+     * 调用父类的SqlSessionDaoSupport的方法来检查SqlSessionFactory 或者sqlSessionTemplate是否为空
      */
     super.checkDaoConfig();
 
     /**
-     * 断言我们的mapperInterface(我们mapper接口class类型是否为空)
+     * 断言mapperInterface( mapper接口class类型是否为空)
      */
     notNull(this.mapperInterface, "Property 'mapperInterface' is required");
 
@@ -112,12 +112,12 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
      */
     Configuration configuration = getSqlSession().getConfiguration();
     /**
-     * 判断我们的mapperRegistry 的knownMappers Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
+     * 判断mapperRegistry 的knownMappers Map<Class<?>, MapperProxyFactory<?>> knownMappers = new HashMap<>();
      */
     if (this.addToConfig && !configuration.hasMapper(this.mapperInterface)) {
       try {
         /**
-         * 把我们的接口类型保存到sqlSessionFactory的属性Configuration对象 的MapperRegistry属性中
+         * 把接口类型保存到sqlSessionFactory的属性Configuration对象 的MapperRegistry属性中
          */
         configuration.addMapper(this.mapperInterface);
       } catch (Exception e) {
@@ -130,7 +130,7 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
   }
 
   /**
-   * 方法实现说明:由于是我们factoryBean,那么我们service中注入我们的UserMapper的时候 就会调用我们的getObject()
+   * 方法实现说明:由于是 factoryBean,那么 service中注入UserMapper的时候 就会调用getObject()
    *
    * @author:xsls
    * @return:
@@ -140,7 +140,7 @@ public class MapperFactoryBean<T> extends SqlSessionDaoSupport implements Factor
   @Override
   public T getObject() throws Exception {
     /**
-     * 第一步:就是获取我么女的SqlSessionTemplate 第二步:获取我们的SqlSessionTemplate.getMapper(mapperInterface)方法
+     * 第一步:就是获取我么女的SqlSessionTemplate 第二步:获取SqlSessionTemplate.getMapper(mapperInterface)方法
      */
     return getSqlSession().getMapper(this.mapperInterface);
   }

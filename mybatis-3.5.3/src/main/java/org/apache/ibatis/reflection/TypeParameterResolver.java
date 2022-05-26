@@ -45,7 +45,7 @@ public class TypeParameterResolver {
    *         they will be resolved to the actual runtime {@link Type}s.
    */
   /**
-   * 方法实现说明:解析我们的返回值的类型
+   * 方法实现说明:解析返回值的类型
    * Type是Java语言中所有类型的父接口，包括
         raw types(原始类型，包括类，枚举，接口，注解，数组（但不包括泛型数组）),
         parameterized types（参数化类型，如Set<String>,Map<String,String>,Class<?>）,
@@ -69,7 +69,7 @@ public class TypeParameterResolver {
      */
     Class<?> declaringClass = method.getDeclaringClass();
     /**
-     * 解析我们的返回值
+     * 解析返回值
      */
     return resolveType(returnType, srcType, declaringClass);
   }

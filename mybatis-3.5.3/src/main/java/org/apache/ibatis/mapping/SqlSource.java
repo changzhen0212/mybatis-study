@@ -24,7 +24,7 @@ package org.apache.ibatis.mapping;
 public interface SqlSource {
 
   /**
-   * 方法实现说明:解析我们原生的sql
+   * 方法实现说明:解析 原生的sql
    * @author:xsls
    * @param parameterObject:参数对象
    * @return:BoundSql

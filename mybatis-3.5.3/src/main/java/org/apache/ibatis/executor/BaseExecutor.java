@@ -143,7 +143,7 @@ public abstract class BaseExecutor implements Executor {
 
   /**
    * 执行查询语句
-   * @param ms 我们的执行sql包装对象（MappedStatement）
+   * @param ms 执行sql包装对象（MappedStatement）
    * @param parameter:参数
    * @param rowBounds 逻辑分页参数
    * @param resultHandler:返回结果处理器

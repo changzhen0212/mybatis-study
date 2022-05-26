@@ -281,7 +281,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
 
     /**
-     * 为我们的sqlId 拼接上命名空间
+     * 为sqlId 拼接上命名空间
      */
     id = applyCurrentNamespace(id, false);
     /**
@@ -311,7 +311,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
         .cache(currentCache);
 
     /**
-     * 处理我们的paramMap和parameterType
+     * 处理paramMap和parameterType
      */
     ParameterMap statementParameterMap = getStatementParameterMap(parameterMap, parameterType, id);
     if (statementParameterMap != null) {
@@ -319,7 +319,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
     }
 
     /**
-     * 构建我们的MappedStatement对象
+     * 构建MappedStatement对象
      */
     MappedStatement statement = statementBuilder.build();
     /**
@@ -338,7 +338,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
       Class<?> parameterTypeClass,
       String statementId) {
     /**
-     * 为我们的ParamterMapName对象拼接命名空间,
+     * 为ParamterMapName对象拼接命名空间,
      * 由于paramterMap已经被mybatis淘汰了 所以这种方式不用了
      */
     parameterMapName = applyCurrentNamespace(parameterMapName, true);
@@ -413,7 +413,7 @@ public class MapperBuilderAssistant extends BaseBuilder {
       String foreignColumn,
       boolean lazy) {
     Class<?> javaTypeClass = resolveResultJavaType(resultType, property, javaType);
-    // 根据属性设置的typeHandler获取TypeHandler对象。  但是我们一般不会在属性上自己设置typeHandler,
+    // 根据属性设置的typeHandler获取TypeHandler对象。  但是 一般不会在属性上自己设置typeHandler,
     // 所以根据属性设置的typeHandler获取TypeHandler对象会获取null。   会在下面的build中解析
     TypeHandler<?> typeHandlerInstance = resolveTypeHandler(javaTypeClass, typeHandler);
     List<ResultMapping> composites;

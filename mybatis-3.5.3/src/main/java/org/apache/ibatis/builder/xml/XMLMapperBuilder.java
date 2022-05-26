@@ -90,7 +90,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   /**
-   * 方法实现说明:真正的去解析我们的Mapper.xml(EmployeeMapper.xml)
+   * 方法实现说明:真正的去解析Mapper.xml(EmployeeMapper.xml)
    * @author:xsls
    * @return:
    * @exception:
@@ -102,13 +102,13 @@ public class XMLMapperBuilder extends BaseBuilder {
      */
     if (!configuration.isResourceLoaded(resource)) {
       /**
-       * 真正的解析我们的 <mapper namespace="com.tuling.mapper.EmployeeMapper">
+       * 真正的解析 <mapper namespace="com.tuling.mapper.EmployeeMapper">
        *
        */
       configurationElement(parser.evalNode("/mapper"));
 
       /**
-       * 把资源保存到我们Configuration中
+       * 把资源保存到 Configuration中
        */
       configuration.addLoadedResource(resource);
 
@@ -125,7 +125,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   /**
-   * 方法实现说明:解析我们的<mapper></mapper>节点
+   * 方法实现说明:解析<mapper></mapper>节点
    * @author:xsls
    * @param context document节点
    * @return:
@@ -135,7 +135,7 @@ public class XMLMapperBuilder extends BaseBuilder {
   private void configurationElement(XNode context) {
     try {
       /**
-       * 解析我们的namespace属性
+       * 解析namespace属性
        * <mapper namespace="com.tuling.mapper.EmployeeMapper">
        */
       String namespace = context.getStringAttribute("namespace");
@@ -143,11 +143,11 @@ public class XMLMapperBuilder extends BaseBuilder {
         throw new BuilderException("Mapper's namespace cannot be empty");
       }
       /**
-       * 保存我们当前的namespace  并且判断接口完全类名==namespace
+       * 保存 当前的namespace  并且判断接口完全类名==namespace
        */
       builderAssistant.setCurrentNamespace(namespace);
       /**
-       * 解析我们的缓存引用
+       * 解析缓存引用
        * 说明我当前的缓存引用和DeptMapper的缓存引用一致
        * <cache-ref namespace="com.tuling.mapper.DeptMapper"></cache-ref>
             解析到org.apache.ibatis.session.Configuration#cacheRefMap<当前namespace,ref-namespace>
@@ -155,7 +155,7 @@ public class XMLMapperBuilder extends BaseBuilder {
        */
       cacheRefElement(context.evalNode("cache-ref"));
       /**
-       * 解析我们的cache节点
+       * 解析cache节点
        * <cache ></cache>
           解析到：org.apache.ibatis.session.Configuration#caches
                  org.apache.ibatis.builder.MapperBuilderAssistant#currentCache
@@ -166,21 +166,21 @@ public class XMLMapperBuilder extends BaseBuilder {
        */
       parameterMapElement(context.evalNodes("/mapper/parameterMap"));
       /**
-       * 解析我们的resultMap节点
+       * 解析resultMap节点
        * 解析到：org.apache.ibatis.session.Configuration#resultMaps
        *    异常 org.apache.ibatis.session.Configuration#incompleteResultMaps
        *
        */
       resultMapElements(context.evalNodes("/mapper/resultMap"));
       /**
-       * 解析我们通过sql片段
+       * 解析 通过sql片段
        *  解析到org.apache.ibatis.builder.xml.XMLMapperBuilder#sqlFragments
        *   其实等于 org.apache.ibatis.session.Configuration#sqlFragments
        *   因为他们是同一引用，在构建XMLMapperBuilder 时把Configuration.getSqlFragments传进去了
        */
       sqlElement(context.evalNodes("/mapper/sql"));
       /**
-       * 解析我们的select | insert |update |delete节点
+       * 解析select | insert |update |delete节点
        * 解析到org.apache.ibatis.session.Configuration#mappedStatements
        */
       buildStatementFromContext(context.evalNodes("select|insert|update|delete"));
@@ -200,8 +200,8 @@ public class XMLMapperBuilder extends BaseBuilder {
   }
 
   /**
-   * 方法实现说明:解析我们得得select|update|delte|insert节点然后
-   * 创建我们得mapperStatment对象
+   * 方法实现说明:解析 得得select|update|delte|insert节点然后
+   * 创建 得mapperStatment对象
    * @author:xsls
    * @param list:所有的select|update|delte|insert节点
    * @param requiredDatabaseId:判断有没有数据库厂商Id
@@ -211,7 +211,7 @@ public class XMLMapperBuilder extends BaseBuilder {
    */
   private void buildStatementFromContext(List<XNode> list, String requiredDatabaseId) {
     /**
-     * 循环我们的select|delte|insert|update节点
+     * 循环select|delte|insert|update节点
      */
     for (XNode context : list) {
       /**
@@ -283,13 +283,13 @@ public class XMLMapperBuilder extends BaseBuilder {
   private void cacheRefElement(XNode context) {
     if (context != null) {
       /**
-       * 把namespace保存到我们的缓存引用中map中
+       * 把namespace保存到缓存引用中map中
        * key:当前的mapper引用,value:缓存引用到的mapper
        * Key:com.tuling.mapper.Employee,value:com.tuling.mapper.DeptMapper
        */
       configuration.addCacheRef(builderAssistant.getCurrentNamespace(), context.getStringAttribute("namespace"));
       /**
-       * 通过builderAssistant构建辅助类    缓存引用namespace创建我们的
+       * 通过builderAssistant构建辅助类    缓存引用namespace创建
        * CacheRefResolver
        */
       CacheRefResolver cacheRefResolver = new CacheRefResolver(builderAssistant, context.getStringAttribute("namespace"));

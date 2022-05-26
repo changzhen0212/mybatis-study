@@ -39,7 +39,7 @@ public class XMLLanguageDriver implements LanguageDriver {
   }
 
   /**
-   * 方法实现说明:创建我们的sqlSource对象
+   * 方法实现说明:创建sqlSource对象
    * @author:xsls
    * @param configuration:全局配置
    * @param script:脚本类型

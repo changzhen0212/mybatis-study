@@ -77,9 +77,9 @@ public class CachingExecutor implements Executor {
   }
 
   /**
-   * 方法实现说明:通过我们的sql执行器对象执行sql
+   * 方法实现说明:通过sql执行器对象执行sql
    * @author:xsls
-   * @param ms 用于封装我们一个个的insert|delete|update|select 对象
+   * @param ms 用于封装 一个个的insert|delete|update|select 对象
    * @param parameterObject:参数对象
    * @param rowBounds :mybaits的逻辑分页对象 TODO？？？？？
    * @param resultHandler:结果处理器对象
@@ -90,7 +90,7 @@ public class CachingExecutor implements Executor {
   @Override
   public <E> List<E> query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler) throws SQLException {
     /**
-     * 通过参数对象解析我们的sql详细信息1339025938:1570540512:com.tuling.mapper.selectById:0:2147483647:select id,user_name,create_time from t_user where id=?:1:development
+     * 通过参数对象解析sql详细信息1339025938:1570540512:com.tuling.mapper.selectById:0:2147483647:select id,user_name,create_time from t_user where id=?:1:development
      */
     BoundSql boundSql = ms.getBoundSql(parameterObject);
     CacheKey key = createCacheKey(ms, parameterObject, rowBounds, boundSql);
@@ -107,7 +107,7 @@ public class CachingExecutor implements Executor {
   public <E> List<E> query(MappedStatement ms, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, CacheKey key, BoundSql boundSql)
       throws SQLException {
     /**
-     * 判断我们我们的mapper中是否开启了二级缓存<cache></cache>
+     * 判断 mapper中是否开启了二级缓存<cache></cache>
      */
     Cache cache = ms.getCache();
     /**

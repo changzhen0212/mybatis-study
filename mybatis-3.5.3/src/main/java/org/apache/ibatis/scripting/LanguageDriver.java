@@ -24,9 +24,9 @@ import org.apache.ibatis.scripting.defaults.DefaultParameterHandler;
 import org.apache.ibatis.session.Configuration;
 
 /**
- * 类功能描述:语言解析接口,用来解析我们的sql脚本语言的
+ * 类功能描述:语言解析接口,用来解析sql脚本语言的
  * 默认实现就是class org.apache.ibatis.scripting.xmltags.XMLLanguageDriver
- * 我们自定义的sql脚本语言驱动可以实现该接口
+ *  自定义的sql脚本语言驱动可以实现该接口
  * @author:xsls
  * @return:
  * @exception:
@@ -48,7 +48,7 @@ public interface LanguageDriver {
   /**
    * 方法实现说明:mybatis的参数处理器对象
    * @author:xsls
-   * @param mappedStatement:我们的sql节点对象
+   * @param mappedStatement:sql节点对象
    * @param parameterObject:参数对象
    * @param boundSql:原生的sql
    * @return: ParameterHandler参数处理器对象
@@ -67,7 +67,7 @@ public interface LanguageDriver {
    * @return
    */
   /**
-   * 方法实现说明:创建我们的原生sql对象
+   * 方法实现说明:创建原生sql对象
    * @author:xsls
    * @param configuration:mybaits的全局配置类
    * @param script:sql脚本
@@ -88,7 +88,7 @@ public interface LanguageDriver {
    * @return
    */
   /**
-   * 方法实现说明:创建我们的原生sql对象
+   * 方法实现说明:创建原生sql对象
    * @author:xsls
    * @param configuration:mybaits的全局配置类
    * @param script:sql脚本

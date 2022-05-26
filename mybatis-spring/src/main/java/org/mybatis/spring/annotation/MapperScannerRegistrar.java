@@ -51,11 +51,11 @@ import org.springframework.util.StringUtils;
  */
 /**
  * @vlog: 高于生活，源于生活
- * @desc: 类的描述:这个类是我们spring整合MyBatis的时候 在我们的主配置类上添加了@MapperScann注解 我们研究这个注解的时候
+ * @desc: 类的描述:这个类是 spring整合MyBatis的时候 在主配置类上添加了@MapperScann注解  研究这个注解的时候
  * @Import(MapperScannerRegistrar.class) public @interface MapperScan 发现是一个组合注解@Import导入 MapperScannerRegistrar
- *                                       然后我们分析MapperScannerRegistrar组件是实现了ImportBeanDefinitionRegistrar 集合Spring
- *                                       bean定义的扫描源码，我们知道ImportBeanDefinitionRegistrar 在bean定义扫描的时候
- *                                       会调用registerBeanDefinitions()方法往我们的容器中添加bean定义对象到 beanDefinitionMap中
+ *                                       然后 分析MapperScannerRegistrar组件是实现了ImportBeanDefinitionRegistrar 集合Spring
+ *                                       bean定义的扫描源码， 知道ImportBeanDefinitionRegistrar 在bean定义扫描的时候
+ *                                       会调用registerBeanDefinitions()方法往容器中添加bean定义对象到 beanDefinitionMap中
  * @author: xsls
  * @createDate: 2019/8/20 22:06
  * @version: 1.0
@@ -77,8 +77,8 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
    * {@inheritDoc}
    */
   /**
-   * 方法实现说明:spring ioc在解析我们的住配置类的时候,会解析@MapperScann注解,然后 调用registerBeanDefinitions方法来进行注册我们的bean定义信息
-   * 
+   * 方法实现说明:spring ioc在解析住配置类的时候,会解析@MapperScann注解,然后 调用registerBeanDefinitions方法来进行注册bean定义信息
+   *
    * @author:xsls
    * @param importingClassMetadata
    *          :主配置类的信息(包含了class信息)
@@ -92,7 +92,7 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
   public void registerBeanDefinitions(AnnotationMetadata importingClassMetadata, BeanDefinitionRegistry registry) {
 
     /**
-     * 从我们传入的配置类中来解析@MapperScan注解信息,然后吧MapperScan注解的属性转化为 AnnotationAttributes类型(Map类型)
+     * 从 传入的配置类中来解析@MapperScan注解信息,然后吧MapperScan注解的属性转化为 AnnotationAttributes类型(Map类型)
      */
     AnnotationAttributes mapperScanAttrs = AnnotationAttributes
         .fromMap(importingClassMetadata.getAnnotationAttributes(MapperScan.class.getName()));
@@ -101,7 +101,7 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
      */
     if (mapperScanAttrs != null) {
       /**
-       * 调用重写的方法registerBeanDefinitions generateBaseBeanName(importingClassMetadata, 0) 我们即将注册的bean定义的名称
+       * 调用重写的方法registerBeanDefinitions generateBaseBeanName(importingClassMetadata, 0)  即将注册的bean定义的名称
        * com.tuling.config.MyBatisConfig#MapperScannerRegistrar#0
        */
       registerBeanDefinitions(mapperScanAttrs, registry, generateBaseBeanName(importingClassMetadata, 0));
@@ -111,17 +111,17 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
   void registerBeanDefinitions(AnnotationAttributes annoAttrs, BeanDefinitionRegistry registry, String beanName) {
 
     /**
-     * 创建bean定义构造器 通过够构造器来构建出我们的bean定义<MapperScannerConfigurer> 应用到的设计模式[建造者模式]
+     * 创建bean定义构造器 通过够构造器来构建出bean定义<MapperScannerConfigurer> 应用到的设计模式[建造者模式]
      */
     BeanDefinitionBuilder builder = BeanDefinitionBuilder.genericBeanDefinition(MapperScannerConfigurer.class);
 
     /**
-     * 手动为我们MapperScannerConfigurer 开启processPropertyPlaceHolders属性为true 我们需要着重研究下MapperScannerConfigurer类的继承结构
+     * 手动为 MapperScannerConfigurer 开启processPropertyPlaceHolders属性为true  需要着重研究下MapperScannerConfigurer类的继承结构
      */
     builder.addPropertyValue("processPropertyPlaceHolders", true);
 
     /**
-     * 为我们的MapperScannerConfigurer 解析我们@MapperScanner 指定扫描的的注解类型
+     * 为MapperScannerConfigurer 解析 @MapperScanner 指定扫描的的注解类型
      */
     Class<? extends Annotation> annotationClass = annoAttrs.getClass("annotationClass");
     if (!Annotation.class.equals(annotationClass)) {
@@ -192,15 +192,15 @@ public class MapperScannerRegistrar implements ImportBeanDefinitionRegistrar, Re
     builder.addPropertyValue("basePackage", StringUtils.collectionToCommaDelimitedString(basePackages));
 
     /**
-     * 为我们的容器中注册了MapperScannerConfigurer的接口
+     * 为容器中注册了MapperScannerConfigurer的接口
      */
     registry.registerBeanDefinition(beanName, builder.getBeanDefinition());
 
   }
 
   /**
-   * 方法实现说明:生成我们bean定义的名称
-   * 
+   * 方法实现说明:生成 bean定义的名称
+   *
    * @author:xsls
    * @param importingClassMetadata
    *          传入的配置类

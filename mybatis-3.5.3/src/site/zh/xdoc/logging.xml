@@ -83,7 +83,7 @@ org.apache.ibatis.logging.LogFactory.useStdOutLogging();]]></source>
         <h4>
           步骤 1：添加 Log4J 的 jar 包
         </h4>
-        <p>因为我们使用的是 Log4J，就要确保它的 jar 包在应用中是可用的。要启用 Log4J，只要将 jar 包添加到应用的类路径中即可。Log4J 的 jar 包可以在上面的链接中下载。</p>
+        <p>因为 使用的是 Log4J，就要确保它的 jar 包在应用中是可用的。要启用 Log4J，只要将 jar 包添加到应用的类路径中即可。Log4J 的 jar 包可以在上面的链接中下载。</p>
         <p>对于 web 应用或企业级应用，则需要将 <code>log4j.jar</code> 添加到 <code>WEB-INF/lib</code> 目录下；对于独立应用，可以将它添加到JVM 的 <code>-classpath</code> 启动参数中。</p>
         <p></p>
         <h4>

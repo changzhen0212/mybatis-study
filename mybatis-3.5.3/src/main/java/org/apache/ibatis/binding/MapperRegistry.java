@@ -41,10 +41,10 @@ public class MapperRegistry {
   }
 
   /**
-   * 方法实现说明:通过class类型和sqlSessionTemplate获取我们的Mapper(代理对象)
+   * 方法实现说明:通过class类型和sqlSessionTemplate获取Mapper(代理对象)
    * @author:xsls
    * @param type:Mapper的接口类型
-   * @param sqlSession:接口类型实际上是我们的sqlSessionTemplate类型
+   * @param sqlSession:接口类型实际上是sqlSessionTemplate类型
    * @return:
    * @exception:
    * @date:2019/8/22 20:41
@@ -52,7 +52,7 @@ public class MapperRegistry {
   @SuppressWarnings("unchecked")
   public <T> T getMapper(Class<T> type, SqlSession sqlSession) {
     /**
-     * 直接去缓存knownMappers中通过Mapper的class类型去找我们的mapperProxyFactory
+     * 直接去缓存knownMappers中通过Mapper的class类型去找mapperProxyFactory
      */
     final MapperProxyFactory<T> mapperProxyFactory = (MapperProxyFactory<T>) knownMappers.get(type);
     /**
@@ -63,7 +63,7 @@ public class MapperRegistry {
     }
     try {
       /**
-       * 通过MapperProxyFactory来创建我们的实例
+       * ! 通过MapperProxyFactory来创建实例
        */
       return mapperProxyFactory.newInstance(sqlSession);
     } catch (Exception e) {
@@ -72,9 +72,9 @@ public class MapperRegistry {
   }
 
   /**
-   * 方法实现说明:我们的Mapper接口是否保存在knownMappers  Map集合中
+   * 方法实现说明:Mapper接口是否保存在knownMappers  Map集合中
    * @author:xsls
-   * @param type:我们的Mapper接口
+   * @param type:Mapper接口
    * @return: true or false
    * @exception:
    * @date:2019/8/22 20:28
@@ -84,20 +84,20 @@ public class MapperRegistry {
   }
 
   /**
-   * 方法实现说明:把我们的Mapper class保存到我们的knownMappers map 中
+   * 方法实现说明:把Mapper class保存到knownMappers map 中
    * @author:xsls
-   * @param type:我们的Mapper接口
+   * @param type:Mapper接口
    * @return:
    * @exception:
    * @date:2019/8/22 20:29
    */
   public <T> void addMapper(Class<T> type) {
     /**
-     * 判断我们传入进来的type类型是不是接口
+     * 判断 传入进来的type类型是不是接口
      */
     if (type.isInterface()) {
       /**
-       * 判断我们的缓存中有没有该类型
+       * 判断缓存中有没有该类型
        */
       if (hasMapper(type)) {
         throw new BindingException("Type " + type + " is already known to the MapperRegistry.");
@@ -105,7 +105,7 @@ public class MapperRegistry {
       boolean loadCompleted = false;
       try {
         /**
-         * 创建一个MapperProxyFactory 把我们的Mapper接口保存到工厂类中， 该工厂用于创建 MapperProxy
+         * 创建一个MapperProxyFactory 把Mapper接口保存到工厂类中， 该工厂用于创建 MapperProxy
          */
         knownMappers.put(type, new MapperProxyFactory<>(type));
         // It's important that the type is added before the parser is run

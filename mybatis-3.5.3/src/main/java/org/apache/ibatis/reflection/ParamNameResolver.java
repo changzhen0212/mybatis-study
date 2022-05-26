@@ -51,17 +51,17 @@ public class ParamNameResolver {
 
   public ParamNameResolver(Configuration config, Method method) {
     /**
-     * 解析我们的参数的类型
+     * 解析参数的类型
      */
     final Class<?>[] paramTypes = method.getParameterTypes();
     /**
-     * 解析我们方法上的@Param注解
+     * 解析 方法上的@Param注解
      */
     final Annotation[][] paramAnnotations = method.getParameterAnnotations();
     final SortedMap<Integer, String> map = new TreeMap<>();
     int paramCount = paramAnnotations.length;
     /**
-     * 解析我们标注了@Param注解
+     * 解析 标注了@Param注解
      */
     // get names from @Param annotations
     for (int paramIndex = 0; paramIndex < paramCount; paramIndex++) {
@@ -140,7 +140,7 @@ public class ParamNameResolver {
       final Map<String, Object> param = new ParamMap<>();
       int i = 0;
       /**
-       * 循坏我们所有的参数的个数
+       * 循坏 所有的参数的个数
        */
       for (Map.Entry<Integer, String> entry : names.entrySet()) {
         //把key为id,value为1加入到param中

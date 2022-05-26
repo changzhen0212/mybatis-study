@@ -89,8 +89,8 @@ public final class SqlSessionUtils {
    * @see SpringManagedTransactionFactory
    */
   /**
-   * 方法实现说明:获取我们的session对象
-   * 
+   * 方法实现说明:获取session对象
+   *
    * @author:xsls
    * @param sessionFactory:session工厂对象
    * @param executorType:执行器类型
@@ -106,12 +106,12 @@ public final class SqlSessionUtils {
     notNull(sessionFactory, NO_SQL_SESSION_FACTORY_SPECIFIED);
     notNull(executorType, NO_EXECUTOR_TYPE_SPECIFIED);
     /**
-     * 首先就去我们事务同步管理器对象中获取我们的sessionHolder
+     * 首先就去 事务同步管理器对象中获取sessionHolder
      */
     SqlSessionHolder holder = (SqlSessionHolder) TransactionSynchronizationManager.getResource(sessionFactory);
 
     /**
-     * 从事务管理器中获取我们的sqlSession对象
+     * 从事务管理器中获取sqlSession对象
      */
     SqlSession session = sessionHolder(executorType, holder);
     // session不为空直接返回
@@ -126,7 +126,7 @@ public final class SqlSessionUtils {
     session = sessionFactory.openSession(executorType);
 
     /**
-     * 把我们的session绑定到事务线程变量中
+     * 把session绑定到事务线程变量中
      */
     registerSessionHolder(sessionFactory, executorType, exceptionTranslator, session);
 
@@ -182,7 +182,7 @@ public final class SqlSessionUtils {
 
   /**
    * 方法实现说明
-   * 
+   *
    * @author:xsls
    * @param executorType:执行器类型
    * @return:
@@ -192,12 +192,12 @@ public final class SqlSessionUtils {
   private static SqlSession sessionHolder(ExecutorType executorType, SqlSessionHolder holder) {
     SqlSession session = null;
     /**
-     * 判断我们的从事务同步对象中获取出来的holder对象是否为空 &&holder是否为激活的
+     * 判断从事务同步对象中获取出来的holder对象是否为空 &&holder是否为激活的
      *
      */
     if (holder != null && holder.isSynchronizedWithTransaction()) {
       /**
-       * 在同一个事务中，我们的执行器类型是不能改变的
+       * 在同一个事务中，执行器类型是不能改变的
        */
       if (holder.getExecutorType() != executorType) {
         throw new TransientDataAccessResourceException(
@@ -211,7 +211,7 @@ public final class SqlSessionUtils {
 
       LOGGER.debug(() -> "Fetched SqlSession [" + holder.getSqlSession() + "] from current transaction");
 
-      // 获取我们的session对象
+      // 获取session对象
       session = holder.getSqlSession();
     }
     return session;

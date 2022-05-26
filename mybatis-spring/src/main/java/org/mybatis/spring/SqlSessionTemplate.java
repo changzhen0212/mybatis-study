@@ -133,7 +133,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
     this.executorType = executorType;
     this.exceptionTranslator = exceptionTranslator;
     /**
-     * sqlSession代理对象 来调用我们的目标方法
+     * sqlSession代理对象 来调用目标方法
      */
     this.sqlSessionProxy = (SqlSession) newProxyInstance(SqlSessionFactory.class.getClassLoader(),
         new Class[] { SqlSession.class }, new SqlSessionInterceptor());
@@ -164,7 +164,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
    */
   /**
    * 方法实现说明:sqlSessionTemplate调用查询单个
-   * 
+   *
    * @author:xsls
    * @param statement:com.tuling.mapper.DeptMapper.findDeptByIdAndName
    * @param parameter:参数
@@ -325,7 +325,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
   }
 
   /**
-   * 方法实现说明:通过SqlSessionTeplate获取我们的this.sqlSessionFactory.getConfiguration()对象 来获取我们的Mapper对象
+   * 方法实现说明:通过SqlSessionTeplate获取this.sqlSessionFactory.getConfiguration()对象 来获取Mapper对象
    *
    * @author:xsls
    * @param type:mapper接口类型
@@ -336,7 +336,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
   @Override
   public <T> T getMapper(Class<T> type) {
     /**
-     * 最终去sqlSessionFactory.Configuration.mapperRegistry去获取我们的Mapper对象
+     * 最终去sqlSessionFactory.Configuration.mapperRegistry去获取Mapper对象
      */
     return getConfiguration().getMapper(type, this);
   }
@@ -451,20 +451,20 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
     @Override
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
       /**
-       * 尝试从事务的线程变量中获取session,若没有获取到就直接新开一个session， 所以加事务可以缓存我们的sqlSession(也就是我们的SqlSessionTemplate对象)
+       * 尝试从事务的线程变量中获取session,若没有获取到就直接新开一个session， 所以加事务可以缓存sqlSession(也就是SqlSessionTemplate对象)
        */
       SqlSession sqlSession = getSqlSession(SqlSessionTemplate.this.sqlSessionFactory,
           SqlSessionTemplate.this.executorType, SqlSessionTemplate.this.exceptionTranslator);
       try {
         /**
-         * 调用我们的目标方法代理的就是我们的session接口的方法 因为上一步返回的session是我们DefaultSqlSession对象, 所以在这里直接调用到我们的DefaultSqlSession的方法中
+         * 调用目标方法代理的就是session接口的方法 因为上一步返回的session是 DefaultSqlSession对象, 所以在这里直接调用到DefaultSqlSession的方法中
          */
         Object result = method.invoke(sqlSession, args);
         if (!isSqlSessionTransactional(sqlSession, SqlSessionTemplate.this.sqlSessionFactory)) {
           // force commit even on non-dirty sessions because some databases require
           // a commit/rollback before calling close()
           /**
-           * 提交我们的session
+           * 提交session
            */
           sqlSession.commit(true);
         }
@@ -474,7 +474,7 @@ public class SqlSessionTemplate implements SqlSession, DisposableBean {
         if (SqlSessionTemplate.this.exceptionTranslator != null && unwrapped instanceof PersistenceException) {
           // release the connection to avoid a deadlock if the translator is no loaded. See issue #22
           /**
-           * 抛异常 关闭我们的session
+           * 抛异常 关闭session
            */
           closeSqlSession(sqlSession, SqlSessionTemplate.this.sqlSessionFactory);
           sqlSession = null;

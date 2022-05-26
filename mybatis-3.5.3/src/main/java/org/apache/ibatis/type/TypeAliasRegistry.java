@@ -38,13 +38,13 @@ import org.apache.ibatis.io.Resources;
 public class TypeAliasRegistry {
 
   /**
-   * 用于保存我们自定义的别名映射
+   * 用于保存 自定义的别名映射
    * <employee,com.tuling.entity.Employee>
    */
   private final Map<String, Class<?>> typeAliases = new HashMap<>();
 
   /**
-   * mybaits对我们默认的别名支撑
+   * mybaits对 默认的别名支撑
    */
   public TypeAliasRegistry() {
     registerAlias("string", String.class);
@@ -125,7 +125,7 @@ public class TypeAliasRegistry {
         value = (Class<T>) typeAliases.get(key);
       } else {
         /**
-         * 若我们别名字符串是java.lang.String,通过反射获取字符串
+         * 若 别名字符串是java.lang.String,通过反射获取字符串
          */
         value = (Class<T>) Resources.classForName(string);
       }

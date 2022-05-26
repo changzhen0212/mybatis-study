@@ -432,7 +432,7 @@ public class DefaultResultSetHandler implements ResultSetHandler {
     final List<String> mappedColumnNames = rsw.getMappedColumnNames(resultMap, columnPrefix);
     boolean foundValues = false;
     final List<ResultMapping> propertyMappings = resultMap.getPropertyResultMappings();
-    // 根据resultMap处理数据了， 大家都知道resultMap 里面有很多逻辑， 我们就不去看了
+    // 根据resultMap处理数据了， 大家都知道resultMap 里面有很多逻辑，  就不去看了
     // 最简答的方式就是  根据类型处理器获取数据
     // 还有嵌套查询、嵌套结果、多结果集 等等逻辑处理
     for (ResultMapping propertyMapping : propertyMappings) {
